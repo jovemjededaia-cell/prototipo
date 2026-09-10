@@ -1,0 +1,9 @@
+prototipo/
+└── assets/
+    ├── characters/
+    │   ├── warrior/
+    │   ├── mage/
+    │   ├── archer/
+    │   └── penguin/
+    ├── enemies/
+    └── map/
