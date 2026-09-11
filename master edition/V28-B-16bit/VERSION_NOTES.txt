@@ -1,0 +1,14 @@
+V28 — 16-bit RPG Fantasy
+
+Base definitiva modular do Square RPG.
+Os personagens/sprites referenciados permanecem no GitHub do projeto.
+O SpriteSystem aceita imagens transparentes e mantém o fallback da base enquanto o asset não estiver carregado.
+Grade visual do cenário: 32x32.
+
+
+V28 REVISION PASS 1 + PASS 2
+- estabilidade do render e feedback
+- metadata de movimento para sprites
+- feedback de combate e progressao
+- pixel rendering e foco acessivel
+- health check V28Health.run()

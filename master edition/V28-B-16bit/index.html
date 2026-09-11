@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Square RPG — Crônicas da Arena</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <section id="menuInicial" class="menu-cena" aria-label="Menu principal">
+
+    <div class="cena-paisagem" aria-hidden="true">
+      <div class="lua"></div>
+      <div class="montanhas montanhas-atras"></div>
+      <div class="montanhas montanhas-frente"></div>
+      <div class="lago">
+        <div class="reflexo-lua"></div>
+      </div>
+      <div class="floresta floresta-esquerda"></div>
+      <div class="floresta floresta-direita"></div>
+      <div class="castelo">
+        <span class="torre torre-esq"></span>
+        <span class="torre torre-meio"></span>
+        <span class="torre torre-dir"></span>
+        <span class="muralha"></span>
+        <span class="portao"></span>
+      </div>
+      <div class="raio"></div>
+      <div class="nevoa nevoa-1"></div>
+      <div class="nevoa nevoa-2"></div>
+      <div class="vaga-lumes"></div>
+    </div>
+
+    <div class="menu-painel-lateral">
+      <div class="pixel-logo-mini" aria-hidden="true">
+        <svg viewBox="0 0 160 80" role="img">
+          <rect x="0" y="0" width="160" height="80" fill="#0a111b"/>
+          <rect x="20" y="14" width="120" height="52" fill="#1c2b3e"/>
+          <rect x="28" y="22" width="104" height="36" fill="#101a27"/>
+          <rect x="40" y="28" width="18" height="18" fill="#c79d55"/>
+          <rect x="102" y="28" width="18" height="18" fill="#c79d55"/>
+          <rect x="57" y="36" width="45" height="8" fill="#d6b56f"/>
+          <rect x="49" y="48" width="62" height="8" fill="#8b6335"/>
+          <rect x="65" y="56" width="30" height="6" fill="#b88943"/>
+        </svg>
+      </div>
+
+      <div class="ornamento">⚜ ───── ⚜</div>
+      <h1>SQUARE RPG</h1>
+      <div class="subtitulo">CRÔNICAS DA ARENA</div>
+      <div class="linha-dourada"></div>
+      <p class="frase-menu">Toda lenda começa com uma primeira batalha.</p>
+
+      <div class="menu-botoes">
+        <button class="botao-principal" onclick="mostrarClasses()" data-menu-desc="Comece uma nova aventura e gere uma nova dungeon.">⚔ NOVA AVENTURA</button>
+        <button onclick="mostrarPersonagem()" data-menu-desc="Veja o estado do seu herói e seus atributos.">👤 PERSONAGEM</button>
+        <button onclick="mostrarInventario()" data-menu-desc="Confira equipamentos, itens, passivos e evoluções.">🎒 INVENTÁRIO</button>
+        <button onclick="mostrarGrimorio()" data-menu-desc="Consulte classes, técnicas e segredos descobertos.">📖 GRIMÓRIO</button>
+        <button onclick="mostrarConquistas()" data-menu-desc="Veja suas conquistas e marcos da aventura.">🏆 CONQUISTAS</button>
+        <button onclick="mostrarControles()" data-menu-desc="Veja teclado, combate, inventário e comandos especiais.">📜 CONTROLES</button>
+        <button onclick="mostrarMapaInfo()" data-menu-desc="Entenda os ícones e o funcionamento da dungeon procedural.">🗺️ GUIA DO MAPA</button>
+        <button onclick="mostrarOpcoes()" data-menu-desc="Ajuste a posição do HUD e outras preferências.">⚙ OPÇÕES</button>
+      </div>
+
+      <div id="menuDescricaoSelecao" class="menu-descricao-selecao" aria-live="polite">
+        Comece uma nova aventura e gere uma nova dungeon.
+      </div>
+
+      <div class="menu-rodape-cena">
+        <div class="mini-dica">🌙 A lua observa a Arena.</div>
+        <div class="ornamento">⚜ ───── ⚜</div>
+        <div class="rodape">RPG medieval • Arena • Roguelike</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="menuPersonagem" class="tela tela-secundaria" style="display:none">
+    <h1>👤 Personagem</h1>
+    <div class="painel-personagem">
+      <div id="avatarMenu" class="avatar-personagem">⚔️</div>
+      <div class="dados-personagem">
+        <h2 id="personagemNome">Herói da Arena</h2>
+        <p id="personagemDescricao">Escolha uma classe e entre na arena.</p>
+        <div class="estatistica-menu"><span>⭐ Nível</span><strong id="menuNivel">1</strong></div>
+        <div class="estatistica-menu"><span>❤️ Vida</span><strong id="menuVida">---</strong></div>
+        <div class="estatistica-menu"><span>⚔️ Dano</span><strong id="menuDano">---</strong></div>
+        <div class="estatistica-menu"><span>💰 Ouro</span><strong id="menuOuro">0</strong></div>
+
+        <div class="maestria-menu">
+          <div class="maestria-menu-titulo">⚔️ Mestria da Arma Principal</div>
+          <div class="maestria-menu-nome" id="menuMaestriaNome">Aprendiz</div>
+          <div class="maestria-menu-nivel" id="menuMaestriaNivel">Mestria 1</div>
+          <div class="maestria-menu-barra">
+            <div id="menuMaestriaBarra" class="maestria-menu-progresso"></div>
+          </div>
+          <div class="maestria-menu-texto" id="menuMaestriaTexto">0 / 12 usos</div>
+          <div class="maestria-menu-arma" id="menuArmaPrincipal">⚔️ Nenhuma arma</div>
+        </div>
+      </div>
+    </div>
+    <button onclick="voltarMenu()">← Voltar</button>
+  </section>
+
+  <section id="menuInventario" class="tela tela-secundaria inventario-tela" style="display:none">
+    <div class="inventario-topo">
+      <div>
+        <h1>🎒 Inventário</h1>
+        <p class="inventario-subtitulo">Organize seu equipamento e veja como a build está tomando forma.</p>
+      </div>
+      <div class="inventario-ouro">💰 <span id="inventarioOuro">0</span></div>
+    </div>
+
+    <div class="inventario-layout">
+      <aside class="inventario-personagem">
+        <div class="retrato-moldura">
+          <canvas id="inventarioRetrato" width="128" height="128"></canvas>
+        </div>
+        <div class="retrato-nome" id="inventarioNome">Herói da Arena</div>
+        <div class="retrato-classe" id="inventarioClasse">Nenhuma classe</div>
+        <div class="retrato-nivel">⭐ Nível <strong id="inventarioNivel">1</strong></div>
+      </aside>
+
+      <div class="inventario-conteudo">
+        <div class="inventario-abas" role="tablist" aria-label="Categorias do inventário">
+          <button class="inventario-aba ativa" data-categoria="resumo" onclick="selecionarCategoriaInventario('resumo')">📋 Resumo</button>
+          <button class="inventario-aba" data-categoria="equipamento" onclick="selecionarCategoriaInventario('equipamento')">⚔️ Equipamento</button>
+          <button class="inventario-aba" data-categoria="ativos" onclick="selecionarCategoriaInventario('ativos')">🧪 Ativos</button>
+          <button class="inventario-aba" data-categoria="passivos" onclick="selecionarCategoriaInventario('passivos')">💎 Passivos</button>
+          <button class="inventario-aba" data-categoria="evolucoes" onclick="selecionarCategoriaInventario('evolucoes')">⭐ Evoluções</button>
+        </div>
+        <div id="inventarioMenuLista" class="inventario-grid inventario-conteudo-grid"></div>
+      </div>
+    </div>
+
+    <button onclick="voltarMenu()">← Voltar</button>
+  </section>
+
+  <section id="menuGrimorio" class="tela tela-secundaria" style="display:none">
+    <h1>📖 Grimório</h1>
+    <div class="grimorio-cards">
+      <div class="grimorio-card"><div class="grimorio-icone">⚔️</div><strong>Guerreiro</strong><span>Mestre das armas e do combate.</span></div>
+      <div class="grimorio-card"><div class="grimorio-icone">🔮</div><strong>Mago</strong><span>Senhor dos elementos e das artes arcanas.</span></div>
+      <div class="grimorio-card"><div class="grimorio-icone">🏹</div><strong>Arqueiro</strong><span>Mestre do arco, precisão e velocidade.</span></div>
+      <div id="grimorioPenguin" class="grimorio-card penguin-lore" style="display:none"><div class="grimorio-icone">🐧</div><strong>Penguin</strong><span>Uma classe secreta descoberta pelo código.</span></div>
+    </div>
+    <button onclick="voltarMenu()">← Voltar</button>
+  </section>
+
+  <section id="menuConquistas" class="tela tela-secundaria" style="display:none">
+    <h1>🏆 Conquistas</h1>
+    <div class="conquista"><span id="ach1Icon">🔒</span><div><strong>Primeira Vitória</strong><small>Derrote seu primeiro inimigo.</small></div></div>
+    <div class="conquista"><span id="ach2Icon">🔒</span><div><strong>Caçador de Monstros</strong><small>Derrote 100 inimigos.</small></div></div>
+    <div class="conquista"><span id="ach3Icon">🔒</span><div><strong>Matador de Chefes</strong><small>Derrote um chefão.</small></div></div>
+    <div class="conquista"><span id="ach4Icon">🔒</span><div><strong>Lenda da Arena</strong><small>Alcance o nível 65.</small></div></div>
+    <div class="conquista"><span id="ach5Icon">🔒</span><div><strong>Penguin Secreto</strong><small>Desbloqueie a classe Penguin.</small></div></div>
+    <button onclick="voltarMenu()">← Voltar</button>
+  </section>
+
+  <section id="menuOpcoes" class="tela tela-secundaria" style="display:none">
+    <h1>⚙ Opções</h1>
+    <div class="opcao-linha"><span>📊 Barra de status</span><button class="mini-botao" onclick="alternarBarraStatus()">MUDAR</button></div>
+    <div id="posicaoStatusTexto" class="texto-opcao">Posição: Esquerda</div>
+    <div class="opcao-linha"><span>🎮 Movimento</span><span class="valor-opcao">W A S D</span></div>
+    <div class="opcao-linha"><span>⚔ Ataque</span><span class="valor-opcao">↑ ↓ ← →</span></div>
+    <div class="opcao-linha"><span>🎒 Inventário</span><span class="valor-opcao">Q</span></div>
+    <div class="opcao-linha"><span>🧪 Item ativo</span><span class="valor-opcao">R</span></div>
+    <div class="opcao-linha"><span>🔮 Secundário</span><span class="valor-opcao">F</span></div>
+    <div class="opcao-linha"><span>⭐ Evolução</span><span class="valor-opcao">1 / 2 / 3</span></div>
+    <div class="opcao-linha"><span>🖥 Terminal</span><span class="valor-opcao">0</span></div>
+    <div class="opcao-linha"><span>⚔ Dificuldade</span><span class="valor-opcao">Fácil / Difícil</span></div>
+    <button onclick="mostrarControles()">📜 Controles</button>
+    <button onclick="voltarMenu()">← Voltar</button>
+  </section>
+
+  <section id="menuMapaInfo" class="tela tela-secundaria" style="display:none">
+    <h1>🗺️ Guia do Minimapa</h1>
+    <p>O mapa é descoberto durante a run. Os símbolos mostram o tipo de sala e sua posição no caminho.</p>
+
+    <div class="mapa-legenda-grid">
+      <div class="mapa-legenda-card"><span>⚔️</span><div><strong>Combate</strong><small>Inimigos comuns, ouro e experiência.</small></div></div>
+      <div class="mapa-legenda-card"><span>☠️</span><div><strong>Elite</strong><small>Inimigos mais fortes e recompensas melhores.</small></div></div>
+      <div class="mapa-legenda-card"><span>💰</span><div><strong>Tesouro</strong><small>Recompensa especial da sala.</small></div></div>
+      <div class="mapa-legenda-card"><span>🏪</span><div><strong>Loja</strong><small>Compre itens, relíquias e melhorias.</small></div></div>
+      <div class="mapa-legenda-card"><span>❤️</span><div><strong>Descanso</strong><small>Recupere parte da vida antes de continuar.</small></div></div>
+      <div class="mapa-legenda-card"><span>👑</span><div><strong>Chefão</strong><small>Uma batalha especial com recompensa maior.</small></div></div>
+      <div class="mapa-legenda-card mapa-atual-card"><span>●</span><div><strong>Sala atual</strong><small>Você está aqui.</small></div></div>
+      <div class="mapa-legenda-card mapa-anterior-card"><span>●</span><div><strong>Sala anterior</strong><small>Pode ser revisitada pela saída ou pelo botão de retorno.</small></div></div>
+      <div class="mapa-legenda-card"><span>→</span><div><strong>Próxima sala</strong><small>Surge quando a sala atual é concluída.</small></div></div>
+    </div>
+
+    <div class="mapa-regras">
+      <strong>Como o mapa funciona</strong>
+      <span>🎲 A dungeon é procedural e muda a cada run.</span>
+      <span>🚪 A porta da direita avança.</span>
+      <span>↩️ A porta da esquerda retorna para uma sala já visitada.</span>
+      <span>🔒 Salas futuras não são reveladas antes de serem descobertas.</span>
+    </div>
+
+    <button onclick="voltarMenu()">← Voltar</button>
+  </section>
+
+  <section id="menuControles" class="tela tela-secundaria" style="display:none">
+    <h1>📜 Controles</h1>
+    <table class="controle-tabela">
+      <tr><td class="tecla">W A S D</td><td>Movimentar</td></tr>
+      <tr><td class="tecla">↑ ↓ ← →</td><td>Atacar mantendo pressionado</td></tr>
+      <tr><td class="tecla">Q</td><td>Abrir / fechar inventário</td></tr>
+      <tr><td class="tecla">R</td><td>Usar item ativo</td></tr>
+      <tr><td class="tecla">F</td><td>Alternar para o secundário</td></tr>
+      <tr><td class="tecla">1 2 3</td><td>Escolher evolução</td></tr>
+      <tr><td class="tecla">ESC</td><td>Pausar</td></tr>
+      <tr><td class="tecla">0</td><td>Abrir / fechar terminal</td></tr>
+    </table>
+    <button onclick="voltarMenu()">← Voltar</button>
+  </section>
+
+  <section id="menuClasse" class="tela" style="display:none">
+    <h1>⚔️ Escolha seu Herói</h1>
+    <h2>A classe define seu estilo. O restante da aventura será descoberto na dungeon.</h2>
+    <div class="classe-descricao">
+      <button class="guerreiro" onclick="escolherClasse('Guerreiro')">⚔️ Guerreiro<small>Vida alta • corpo a corpo</small></button>
+      <button class="mago" onclick="escolherClasse('Mago')">🔮 Mago<small>Magia • distância</small></button>
+      <button class="arqueiro" onclick="escolherClasse('Arqueiro')">🏹 Arqueiro<small>Precisão • velocidade</small></button>
+    </div>
+    <div id="penguinUnlock" class="penguin-unlock" style="display:none">
+      <div class="penguin-icon">🐧</div><strong>🐧 PENGUIN</strong><small>Classe secreta desbloqueada!</small>
+      <button class="penguin-button" onclick="escolherClasse('Penguin')">🐧 Jogar com Penguin</button>
+    </div>
+    <div id="konamiMensagem" class="konami-mensagem"></div>
+    <button class="opcao" onclick="voltarMenu()">← Voltar</button>
+  </section>
+
+  <!-- =====================================================
+       DIFICULDADE
+  ====================================================== -->
+  <section id="menuDificuldade" class="tela tela-secundaria" style="display:none">
+    <h1>⚔️ Escolha a dificuldade</h1>
+    <p id="dificuldadeDescricao">Fácil permite escolher seu secundário; Difícil entrega um secundário aleatório.</p>
+
+    <div class="dificuldade-cards">
+      <button class="dificuldade-card facil" onclick="selecionarDificuldade('facil')">
+        <span class="dificuldade-icone">🌿</span>
+        <strong>FÁCIL</strong>
+        <small>Comece escolhendo 1 entre 2 armas secundárias.</small>
+      </button>
+
+      <button class="dificuldade-card dificil" onclick="selecionarDificuldade('dificil')">
+        <span class="dificuldade-icone">💀</span>
+        <strong>DIFÍCIL</strong>
+        <small>Comece com sua arma principal + uma secundária aleatória.</small>
+      </button>
+    </div>
+
+    <button class="opcao" onclick="voltarClasse()">← Voltar</button>
+  </section>
+
+  <!-- =====================================================
+       ESCOLHA DO SECUNDÁRIO INICIAL
+  ====================================================== -->
+  <section id="menuSecundarioInicial" class="tela tela-secundaria" style="display:none">
+    <h1>🔮 Escolha seu secundário</h1>
+    <p id="secundarioInicialDescricao">Escolha 1 entre 2 opções para começar a run.</p>
+    <div id="opcoesSecundarioInicial" class="secundario-inicial-grid"></div>
+    <button class="opcao" onclick="voltarDificuldade()">← Voltar</button>
+  </section>
+
+  <section id="menuHabilidade" class="tela" style="display:none">
+    <h1 id="tituloHabilidade"></h1>
+    <p id="descricaoHabilidade"></p>
+    <div id="opcoes"></div>
+    <button class="opcao" onclick="voltarClasse()">← Voltar</button>
+  </section>
+
+  <main id="jogo">
+    <aside id="barraStatus">
+      <div class="status-titulo">⚔️ HERÓI</div>
+      <div id="statusClasse" class="status-classe">Nenhum</div>
+      <div class="status-separador"></div>
+      <div class="status-linha"><span>⭐ Nível</span><strong id="statusNivel">1</strong></div>
+      <div class="status-nome-barra">❤️ Vida</div>
+      <div class="status-barra"><div id="statusVidaBarra" class="status-vida-barra"></div></div>
+      <div id="statusVidaTexto" class="status-barra-texto">100 / 100</div>
+      <div class="status-nome-barra">💠 Experiência</div>
+      <div class="status-barra"><div id="statusXPBarra" class="status-xp-barra"></div></div>
+      <div id="statusXPTexto" class="status-barra-texto">0 / 100</div>
+      <div class="status-separador"></div>
+      <div class="status-linha"><span>⚔️ Dano</span><strong id="statusDano">0</strong></div>
+      <div class="status-linha"><span>🛡️ Defesa</span><strong id="statusDefesa">0%</strong></div>
+      <div class="status-linha"><span>⚡ Velocidade</span><strong id="statusVelocidade">0</strong></div>
+      <div class="status-linha"><span>🎯 Alcance</span><strong id="statusAlcance">0</strong></div>
+      <div class="status-separador"></div>
+      <div class="equipamento-titulo">🗡️ PRINCIPAL</div>
+      <div id="statusPrincipal" class="equipamento-card">Nenhum</div>
+      <div id="statusMaestria" class="status-maestria">Mestria 1 • Aprendiz</div>
+      <div class="equipamento-titulo">🔮 SECUNDÁRIO</div>
+      <div id="statusSecundario" class="equipamento-card">Nenhum</div>
+      <div class="status-separador"></div>
+      <div class="status-linha"><span>💰 Ouro</span><strong id="statusOuro">0</strong></div>
+      <div class="status-linha"><span>💀 Derrotados</span><strong id="statusKills">0</strong></div>
+    </aside>
+
+    <div id="informacoes"></div>
+    <div class="hud">
+      <div class="barra"><div id="barraVida" class="barra-vida"></div></div>
+      <div id="textoVida" class="barra-texto">❤️ Vida</div>
+      <div class="barra"><div id="barraXP" class="barra-xp"></div></div>
+      <div id="textoXP" class="barra-texto">💠 XP</div>
+      <div id="inventarioAtivo">🧪 R: Nenhum item</div>
+    </div>
+
+    <div id="bossHUD"><div id="nomeBoss" class="nome-boss">👑 Chefão</div><div class="barra"><div id="barraBoss" class="barra-boss"></div></div></div>
+
+    <div id="roomBanner" class="room-banner">Sala de Combate • Sala 1</div><div id="roomSeedInfo" class="room-seed-info"></div>
+
+    <div id="miniMapa" class="mini-mapa">
+      <div class="mini-mapa-topo">
+        <div>
+          <div class="mini-mapa-titulo">🗺️ DUNGEON</div>
+          <div id="miniMapaProgresso" class="mini-mapa-progresso">Sala 1 • 1º andar</div>
+        </div>
+        <span id="miniMapaSeedIcon" class="mini-mapa-seed" title="Seed desta sala">◆</span>
+      </div>
+
+      <div class="mini-mapa-sala-titulo">SALA ATUAL</div>
+      <div id="miniMapaSalaAtual" class="mini-mapa-sala-atual" aria-label="Mapa reduzido da sala atual"></div>
+
+      <div class="mini-mapa-caminho-titulo">CAMINHO DESCOBERTO</div>
+      <div id="miniMapaSalas" class="mini-mapa-salas"></div>
+
+      <div id="miniMapaStatus" class="mini-mapa-status">Explore a sala para revelar o caminho.</div>
+      <button id="miniMapaVoltar" class="mini-mapa-voltar" onclick="transitionToPreviousRoom()" style="display:none;">↩ Voltar 1 sala</button>
+      <div id="miniMapaLegenda" class="mini-mapa-legenda">⚔️ combate • ☠️ elite • 💰 tesouro • 🏪 loja • ❤️ descanso • 👑 chefe</div>
+    </div>
+
+    <canvas id="canvas" width="800" height="512"></canvas>
+    <p id="mensagem">WASD move • Setas atacam • Q inventário • R item • F trocar equipamento • 1/2/3 evolução • ESC pausa • 0 terminal</p>
+
+    <div id="pauseOverlay" class="overlay">
+      <div class="pause-box"><h1>⏸️ Pausado</h1><p>A arena aguarda seu retorno.</p><button onclick="continuarJogo()">▶ Continuar</button><button onclick="abrirInventarioJogo()">🎒 Inventário</button><button onclick="reiniciarPartida()">🔄 Reiniciar</button><button onclick="sairParaMenu()">🏠 Menu</button></div>
+    </div>
+
+    <div id="evolucaoOverlay" class="overlay">
+      <div class="evolucao-conteudo"><h1 id="tituloEvolucao">⭐ Evolução</h1><p id="descricaoEvolucao"></p><div id="opcoesEvolucao" class="evolucao-cards"></div></div>
+    </div>
+
+    <div id="lojaOverlay" class="overlay">
+      <div class="loja-box"><h1>🏪 Loja do Mercador</h1><p id="lojaMensagem">Seu ouro está seguro.</p><div class="loja-topline"><span id="lojaCategoriaFiltro">Mercadoria da região</span><button id="lojaReroll" type="button">🔄 Renovar (15💰)</button></div>
+      <div id="lojaItens" class="loja-grid"></div><button onclick="sairLoja()">🚪 Sair da Loja</button></div>
+    </div>
+
+    <div id="salaOverlay" class="overlay">
+      <div class="sala-box"><h1 id="salaTitulo">🗺️ Evento</h1><p id="salaDescricao"></p><div id="salaOpcoes" class="sala-opcoes"></div></div>
+    </div>
+
+    <div id="gameOverOverlay" class="overlay">
+      <div class="game-over-box"><h1>☠️ Fim da Aventura</h1><p id="resultadoGameOver"></p><button onclick="reiniciarPartida()">🔄 Tentar novamente</button><button onclick="sairParaMenu()">🏠 Menu</button></div>
+    </div>
+  </main>
+
+  <div id="debugHud" aria-live="polite">
+    <div class="debug-hud-title">🛠 DEBUG MODE <span id="debugStatus">OFF</span></div>
+    <div id="debugHudBody"></div>
+  </div>
+
+  <div id="devTerminal">
+    <div id="terminalJanela">
+      <div id="terminalCabecalho"><span>🖥 SQUARE RPG — DEV CONSOLE</span><button id="terminalFechar" type="button">✕</button></div>
+      <div id="terminalHistorico"></div>
+      <div id="terminalEntrada"><span class="terminalPrompt">&gt;</span><input id="terminalInput" type="text" autocomplete="off" spellcheck="false" placeholder="Digite help..."></div>
+    </div>
+  </div>
+
+  <script src="art-config.js"></script>
+  <script src="systems/sprite-system.js"></script>
+  <script src="systems/animation-system.js"></script>
+  <script src="data/game-version.js"></script>
+  <script src="game.js"></script>
+
+  <div id="inventarioOverlay" class="overlay">
+    <div class="inventario-jogo inventario-jogo-refinado">
+      <div class="inventario-jogo-cabecalho">
+        <div>
+          <h1>🎒 Inventário da Run</h1>
+          <p>Veja e organize tudo o que você encontrou nesta aventura.</p>
+        </div>
+        <div class="inventario-jogo-ouro">💰 <strong id="inventarioJogoOuro">0</strong></div>
+      </div>
+
+      <div class="inventario-jogo-abas" role="tablist" aria-label="Categorias do inventário da run">
+        <button class="inventario-jogo-aba ativa" data-categoria="resumo" onclick="selecionarCategoriaInventarioJogo('resumo')">📋 Resumo</button>
+        <button class="inventario-jogo-aba" data-categoria="equipamento" onclick="selecionarCategoriaInventarioJogo('equipamento')">⚔️ Equipamento</button>
+        <button class="inventario-jogo-aba" data-categoria="ativos" onclick="selecionarCategoriaInventarioJogo('ativos')">🧪 Ativos</button>
+        <button class="inventario-jogo-aba" data-categoria="passivos" onclick="selecionarCategoriaInventarioJogo('passivos')">💎 Passivos</button>
+        <button class="inventario-jogo-aba" data-categoria="evolucoes" onclick="selecionarCategoriaInventarioJogo('evolucoes')">⭐ Evoluções</button>
+        <button class="inventario-jogo-aba" data-categoria="cartas" onclick="selecionarCategoriaInventarioJogo('cartas')">🃏 Cartas</button>
+        <button class="inventario-jogo-aba" data-categoria="subitens" onclick="selecionarCategoriaInventarioJogo('subitens')">🔹 Subitens</button>
+      </div>
+
+      <div class="inventario-jogo-corpo">
+        <aside class="inventario-jogo-perfil">
+          <div class="inventario-mini-retrato" id="inventarioJogoRetrato">⚔️</div>
+          <strong id="inventarioJogoClasse">Herói</strong>
+          <span id="inventarioJogoNivel">Nível 1</span>
+          <div class="inventario-mini-divisor"></div>
+          <span id="inventarioJogoPrincipal">🗡️ Nenhum</span>
+          <span id="inventarioJogoSecundario">🛡️ Nenhum</span>
+          <span id="inventarioJogoAtivo">🧪 Nenhum</span>
+        </aside>
+        <div id="inventarioJogoLista" class="inventario-grid inventario-jogo-lista"></div>
+      </div>
+
+      <div class="inventario-ajuda">Q ou ESC — fechar • F — principal/secundário • R — usar item ativo</div>
+      <button onclick="fecharInventarioJogo()">Fechar</button>
+    </div>
+  </div>
+</body>
+</html>

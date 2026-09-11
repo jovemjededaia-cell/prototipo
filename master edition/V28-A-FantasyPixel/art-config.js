@@ -1,0 +1,20 @@
+window.SQUARE_RPG_ART={
+  name:'Fantasy Pixel', tileSize:32,
+  player:{
+    Guerreiro:{
+      idle:{
+        down:'https://raw.githubusercontent.com/jovemjededaia-cell/prototipo/main/Fantasy%20Pixels%20personagens/Proto/Idle/Proto_Idle_Down.png',
+        right:'https://raw.githubusercontent.com/jovemjededaia-cell/prototipo/main/Fantasy%20Pixels%20personagens/Proto/Idle/Proto_Idle_Right.png',
+        up:'https://raw.githubusercontent.com/jovemjededaia-cell/prototipo/main/Fantasy%20Pixels%20personagens/Proto/Idle/Proto_Idle_Up.png'
+      },
+      walk:{
+        down:'https://raw.githubusercontent.com/jovemjededaia-cell/prototipo/main/Fantasy%20Pixels%20personagens/Proto/WalkWeapon/Proto_WalkWeapon_Down.png',
+        right:'https://raw.githubusercontent.com/jovemjededaia-cell/prototipo/main/Fantasy%20Pixels%20personagens/Proto/WalkWeapon/Proto_WalkWeapon_Right.png',
+        up:'https://raw.githubusercontent.com/jovemjededaia-cell/prototipo/main/Fantasy%20Pixels%20personagens/Proto/WalkWeapon/Proto_WalkWeapon_Up.png'
+      },
+      canFlipSide:true
+    }
+  },
+  enemies:{},
+  map:'https://raw.githubusercontent.com/jovemjededaia-cell/prototipo/main/fantasy%20pixel%20mapa/Top-Down%20RPG%2032x32%20by%20Mixel%20v1.7/Sample%20640x640.PNG'
+};
