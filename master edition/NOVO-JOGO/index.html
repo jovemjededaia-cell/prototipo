@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fantasy Pixel — Novo Jogo</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <h1>⚔ Fantasy Pixel</h1>
+        <p>Novo núcleo de jogo — V1</p>
+      </div>
+      <div class="badge">PROTÓTIPO JOGÁVEL</div>
+    </header>
+
+    <section class="game-card">
+      <canvas id="game" width="960" height="540" aria-label="Área do jogo"></canvas>
+      <div class="controls">
+        <span><b>WASD / Setas</b> mover</span>
+        <span><b>Espaço / Clique</b> atacar</span>
+        <span><b>R</b> reiniciar após derrota</span>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="./game.js"></script>
+</body>
+</html>
